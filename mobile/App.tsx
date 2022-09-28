@@ -1,21 +1,29 @@
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View } from 'react-native'
-import { GameController } from 'phosphor-react-native'
+import {
+  useFonts,
+  Inter_400Regular,
+  Inter_600SemiBold,
+  Inter_700Bold,
+  Inter_900Black } from '@expo-google-fonts/inter'
+  
+import { Background } from './src/components/Background'
+import { Routes } from './src/routes'
 
 export default function App() {
+  let [fontsLoaded] = useFonts({
+    Inter_400Regular,
+    Inter_600SemiBold,
+    Inter_700Bold,
+    Inter_900Black
+  })
+  if (!fontsLoaded) return null
   return (
-    <View style={styles.container}>
-      <GameController color='#000' size={64} />
-      <StatusBar style="auto" />
-    </View>
+    <Background>
+      <Routes />
+      <StatusBar
+        backgroundColor='transparent'
+        style='light'
+        translucent />
+    </Background>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
